@@ -154,12 +154,7 @@ function Library:main()
             TextBox.Text = ""
             UICorner.CornerRadius = UDim.new(0, 5)
             UICorner.Parent = TextBox
-            TextBox.FocusLost:Connect(
-                function()
-                    callback(TextBox.Text)
-                end
-            )
-            TextBox.ReturnPressedFromOnScreenKeyboard:Connect(
+            TextBox.Changed:Connect(
                 function()
                     callback(TextBox.Text)
                 end
@@ -288,6 +283,7 @@ function Library:main()
             local xm
             local open = false
             TextBox.Parent = ScrollingFrame
+			local open = false
             for i, v in pairs(items:GetChildren()) do
                 local TextButton_3 = Instance.new("TextButton")
                 local UICorner_9 = Instance.new("UICorner")
@@ -304,6 +300,11 @@ function Library:main()
                 xm = i
                 TextButton_3.Activated:Connect(
                     function()
+						dropdown.Size = UDim2.new(0, 300, 0, 25)
+                        TextLabel.Rotation = 0
+                        open = false
+                        ScrollingFrame.Visible = open
+						dropdown_2.Text = name.." "..TextButton_3.Text
                         callback(TextButton_3.Text)
                     end
                 )
@@ -322,7 +323,7 @@ function Library:main()
                 end
             )
             exsection.CanvasSize = UDim2.new(1, 0, 1, 99999)
-            local open = false
+
             ScrollingFrame.CanvasSize = UDim2.new(1, 0, 0, UIListLayout_3.AbsoluteContentSize.Y)
             dropdown_2.Activated:Connect(
                 function()
