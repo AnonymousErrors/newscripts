@@ -1,14 +1,14 @@
 local Library = {}
 function Library:main()
-	local ScreenGui = Instance.new("ScreenGui")
+    local ScreenGui = Instance.new("ScreenGui")
     local Frame = Instance.new("Frame")
     local sl = Instance.new("Frame")
     local slmain = Instance.new("ScrollingFrame")
     local uiname = Instance.new("TextLabel")
-	local sections = Instance.new("Frame")
-	ScreenGui.Parent = game.CoreGui
-	--main
-	Frame.Parent = ScreenGui
+    local sections = Instance.new("Frame")
+    ScreenGui.Parent = game.CoreGui
+    --main
+    Frame.Parent = ScreenGui
     Frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
     Frame.BorderColor3 = Color3.fromRGB(35, 35, 35)
     Frame.BorderSizePixel = 2
@@ -17,8 +17,8 @@ function Library:main()
     local UICorner_12 = Instance.new("UICorner")
     UICorner_12.CornerRadius = UDim.new(0, 5)
     UICorner_12.Parent = Frame
-	--name
-	uiname.Name = "uiname"
+    --name
+    uiname.Name = "uiname"
     uiname.Parent = Frame
     uiname.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
     uiname.BorderColor3 = Color3.fromRGB(35, 35, 35)
@@ -40,7 +40,7 @@ function Library:main()
     sl.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
     sl.Position = UDim2.new(0.00999999978, 0, 0.100346021, 0)
     sl.Size = UDim2.new(0, 145, 0, 252)
-    local gay= {}
+    local gay = {}
     slmain.Name = "slmain"
     slmain.Parent = sl
     slmain.Active = true
@@ -69,11 +69,11 @@ function Library:main()
     sections.Size = UDim2.new(-0.00200000009, 335, 0.941176355, 0)
     UICorner_11.CornerRadius = UDim.new(0, 5)
     UICorner_11.Parent = sections
-	--create section
-	function gay:section(name)
+    --create section
+    function gay:section(name)
         --tab
         local TextButton = Instance.new("TextButton")
-		TextButton.Parent = slmain
+        TextButton.Parent = slmain
         TextButton.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
         TextButton.BorderColor3 = Color3.fromRGB(35, 35, 35)
         TextButton.Position = UDim2.new(0, 0, 0.0103806229, 0)
@@ -85,16 +85,21 @@ function Library:main()
         local UICorner_2 = Instance.new("UICorner")
         UICorner_2.CornerRadius = UDim.new(0, 5)
         UICorner_2.Parent = TextButton
-        
-		TextButton.Activated:Connect(function()
-			for i,v in pairs(sections:GetChildren()) do
-				if v:IsA("ScrollingFrame") and v.Name == TextButton.Text then
-					v.Visible = true
-				elseif v:IsA("ScrollingFrame") then v.Visible = false end end
-        end)
+
+        TextButton.Activated:Connect(
+            function()
+                for i, v in pairs(sections:GetChildren()) do
+                    if v:IsA("ScrollingFrame") and v.Name == TextButton.Text then
+                        v.Visible = true
+                    elseif v:IsA("ScrollingFrame") then
+                        v.Visible = false
+                    end
+                end
+            end
+        )
         local UIListLayout_4 = Instance.new("UIListLayout")
         local exsection = Instance.new("ScrollingFrame")
-		exsection.Name = name
+        exsection.Name = name
         exsection.Parent = sections
         exsection.Active = true
         exsection.AnchorPoint = Vector2.new(0.5, 0.5)
@@ -106,17 +111,17 @@ function Library:main()
         exsection.Size = UDim2.new(1, 0, 0.980000019, 0)
         exsection.ScrollBarThickness = 5
         exsection.ScrollingDirection = Enum.ScrollingDirection.Y
-        exsection.CanvasSize = UDim2.new(1, 0, 1,99999)
+        exsection.CanvasSize = UDim2.new(1, 0, 1, 99999)
         UIListLayout_4.Parent = exsection
         UIListLayout_4.HorizontalAlignment = Enum.HorizontalAlignment.Center
         UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
         UIListLayout_4.Padding = UDim.new(0, 5)
-		local section = {}
-		--addbutton
-        function section:addbutton(name,callback)
+        local section = {}
+        --addbutton
+        function section:addbutton(name, callback)
             local button = Instance.new("TextButton")
             local UICorner_4 = Instance.new("UICorner")
-            exsection.CanvasSize = UDim2.new(1, 0, 1,99999)
+            exsection.CanvasSize = UDim2.new(1, 0, 1, 99999)
             button.Name = "button"
             button.Parent = exsection
             button.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -130,16 +135,46 @@ function Library:main()
             UICorner_4.CornerRadius = UDim.new(0, 5)
             UICorner_4.Parent = button
             button.Activated:Connect(callback)
-		end
-		--toggle
-		function section:addtoggle(name,callback)
-			local callback = callback or function() end;
-            local yet = false;
+        end
+        --textbox
+        function section:addtextbox(placeholdertext, callback)
+            local TextBox = Instance.new("TextBox")
+            local UICorner = Instance.new("UICorner")
+            callback = callback or function()
+                end
+            TextBox.Parent = exsection
+            TextBox.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+            TextBox.BorderColor3 = Color3.fromRGB(35, 35, 35)
+            TextBox.Size = UDim2.new(0, 300, 0, 25)
+            TextBox.Font = Enum.Font.SourceSans
+            TextBox.PlaceholderColor3 = Color3.fromRGB(200, 200, 200)
+            TextBox.PlaceholderText = placeholdertext
+            TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+            TextBox.TextSize = 14.000
+            TextBox.Text = ""
+            UICorner.CornerRadius = UDim.new(0, 5)
+            UICorner.Parent = TextBox
+            TextBox.FocusLost:Connect(
+                function()
+                    callback(TextBox.Text)
+                end
+            )
+            TextBox.ReturnPressedFromOnScreenKeyboard:Connect(
+                function()
+                    callback(TextBox.Text)
+                end
+            )
+        end
+        --toggle
+        function section:addtoggle(name, callback)
+            local callback = callback or function()
+                end
+            local yet = false
             local toggle = Instance.new("TextLabel")
             local UICorner_6 = Instance.new("UICorner")
             local UICorner_5 = Instance.new("UICorner")
             local TextButton_2 = Instance.new("TextButton")
-			toggle.Name = "troggle"
+            toggle.Name = "troggle"
             toggle.Parent = exsection
             toggle.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
             toggle.BorderColor3 = Color3.fromRGB(35, 35, 35)
@@ -148,7 +183,7 @@ function Library:main()
             toggle.Text = name
             toggle.TextColor3 = Color3.fromRGB(255, 255, 255)
             toggle.TextSize = 14.000
-            exsection.CanvasSize = UDim2.new(1, 0, 1,99999)
+            exsection.CanvasSize = UDim2.new(1, 0, 1, 99999)
             UICorner_6.CornerRadius = UDim.new(0, 5)
             UICorner_6.Parent = toggle
             TextButton_2.Parent = toggle
@@ -163,18 +198,20 @@ function Library:main()
             TextButton_2.TextSize = 14.000
             UICorner_5.CornerRadius = UDim.new(0, 5)
             UICorner_5.Parent = TextButton_2
-			TextButton_2.Activated:Connect(function()
-				yet = not yet;
-                if yet then
-                    TextButton_2.BackgroundColor3 = Color3.fromRGB(34,139,34)
-				else
-					TextButton_2.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
-				end
-				callback(yet);
-			end)
-		end
-		--dropdown
-        function section:adddropdown(name,tbl,callback)
+            TextButton_2.Activated:Connect(
+                function()
+                    yet = not yet
+                    if yet then
+                        TextButton_2.BackgroundColor3 = Color3.fromRGB(34, 139, 34)
+                    else
+                        TextButton_2.BackgroundColor3 = Color3.fromRGB(45, 45, 45)
+                    end
+                    callback(yet)
+                end
+            )
+        end
+        --dropdown
+        function section:adddropdown(name, tbl, callback)
             local dropdown = Instance.new("Frame")
             local dropdown_2 = Instance.new("TextButton")
             local UICorner_10 = Instance.new("UICorner")
@@ -186,7 +223,7 @@ function Library:main()
             TextBox.Text = ""
             TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
             TextBox.TextSize = 14.000
-			dropdown.Name = "dropdown"
+            dropdown.Name = "dropdown"
             dropdown.Parent = exsection
             dropdown.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
             dropdown.BorderColor3 = Color3.fromRGB(35, 35, 35)
@@ -238,20 +275,20 @@ function Library:main()
             local UIPadding_2 = Instance.new("UIPadding")
             UIPadding_2.Parent = ScrollingFrame
             UIPadding_2.PaddingTop = UDim.new(0, 4)
-			
-			local items = Instance.new("Folder")
-			items.Name = "items"
-			items.Parent = dropdown
-			local x = tbl
-			for _,Key in pairs(x) do
-				local val = Instance.new("StringValue")
-				val.Parent = items
-				val.Value = tostring(Key)
-			end
-			local xm
-			local open = false
+
+            local items = Instance.new("Folder")
+            items.Name = "items"
+            items.Parent = dropdown
+            local x = tbl
+            for _, Key in pairs(x) do
+                local val = Instance.new("StringValue")
+                val.Parent = items
+                val.Value = tostring(Key)
+            end
+            local xm
+            local open = false
             TextBox.Parent = ScrollingFrame
-            for i,v in pairs(items:GetChildren()) do
+            for i, v in pairs(items:GetChildren()) do
                 local TextButton_3 = Instance.new("TextButton")
                 local UICorner_9 = Instance.new("UICorner")
                 TextButton_3.Parent = ScrollingFrame
@@ -264,43 +301,49 @@ function Library:main()
                 TextButton_3.TextSize = 14.000
                 UICorner_9.CornerRadius = UDim.new(0, 5)
                 UICorner_9.Parent = TextButton_3
-				xm = i
-				TextButton_3.Activated:Connect(function()
-					callback(TextButton_3.Text);
-				end)
+                xm = i
+                TextButton_3.Activated:Connect(
+                    function()
+                        callback(TextButton_3.Text)
+                    end
+                )
             end
-            TextBox.Changed:Connect(function()
-		        for i,v in pairs(ScrollingFrame:GetChildren()) do
-			        if v:IsA("TextButton") then
-				        if string.find(v.Text:lower(),TextBox.Text:lower()) then
-					        v.Visible = true
-				        else v.Visible = false
-				        end
-			        end
-		        end	
-            end)
-            exsection.CanvasSize = UDim2.new(1, 0, 1,99999)
-            local open = false
-			ScrollingFrame.CanvasSize = UDim2.new(1, 0, 0, UIListLayout_3.AbsoluteContentSize.Y)
-			dropdown_2.Activated:Connect(function()
-				if open then
-                    dropdown.Size = UDim2.new(0, 300,0, 25)
-                    TextLabel.Rotation = 0
-                    open = not open
-                    ScrollingFrame.Visible = open
-                else
-                    dropdown.Size = UDim2.new(0,300,0, 325)
-                    TextLabel.Rotation = 180
-                    open = not open
-                    ScrollingFrame.Visible = open		
+            TextBox.Changed:Connect(
+                function()
+                    for i, v in pairs(ScrollingFrame:GetChildren()) do
+                        if v:IsA("TextButton") then
+                            if string.find(v.Text:lower(), TextBox.Text:lower()) then
+                                v.Visible = true
+                            else
+                                v.Visible = false
+                            end
+                        end
+                    end
                 end
-			end)
-            
-		end
+            )
+            exsection.CanvasSize = UDim2.new(1, 0, 1, 99999)
+            local open = false
+            ScrollingFrame.CanvasSize = UDim2.new(1, 0, 0, UIListLayout_3.AbsoluteContentSize.Y)
+            dropdown_2.Activated:Connect(
+                function()
+                    if open then
+                        dropdown.Size = UDim2.new(0, 300, 0, 25)
+                        TextLabel.Rotation = 0
+                        open = not open
+                        ScrollingFrame.Visible = open
+                    else
+                        dropdown.Size = UDim2.new(0, 300, 0, 325)
+                        TextLabel.Rotation = 180
+                        open = not open
+                        ScrollingFrame.Visible = open
+                    end
+                end
+            )
+        end
         function section:addlabel(name)
             local label = Instance.new("TextLabel")
             local UICorner_7 = Instance.new("UICorner")
-			label.Name = "label"
+            label.Name = "label"
             label.Parent = exsection
             label.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
             label.BorderColor3 = Color3.fromRGB(35, 35, 35)
@@ -312,10 +355,10 @@ function Library:main()
             label.Text = name
             UICorner_7.CornerRadius = UDim.new(0, 5)
             UICorner_7.Parent = label
-            exsection.CanvasSize = UDim2.new(1, 0, 1,99999)
+            exsection.CanvasSize = UDim2.new(1, 0, 1, 99999)
         end
         -- slider
-        function section:addslider(name,minv,maxv, --[[why r u lookin thru my code?]] x, callback)
+        function section:addslider(name, minv, maxv --[[why r u lookin thru my code?]], x, callback)
             --locals for slider
             -- by 1 px it the val increases with x
             local sliderframe = Instance.new("Frame")
@@ -324,7 +367,7 @@ function Library:main()
             local corn1 = Instance.new("UICorner")
             local lbl1 = Instance.new("TextLabel")
             local inservice = game:GetService("UserInputService")
-            local val =  x --/ sliderframe.Size.X.Offset -- value per percent
+            local val = x --/ sliderframe.Size.X.Offset -- value per percent
             local mice = game.Players.LocalPlayer:GetMouse()
             local snapAmount = x
             local pixelsFromEdge = 5
@@ -366,109 +409,134 @@ function Library:main()
             lbl1.TextWrapped = true
             lbl1.TextXAlignment = Enum.TextXAlignment.Right
             --scrippy part
-            lbl.MouseButton1Down:Connect(function()	
-                movingSlider = true
-            end)
-            lbl.MouseButton1Up:Connect(function()	
-                movingSlider = false
-            end)
-            inservice.InputEnded:Connect(function(inputObject)
-                if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
+            lbl.MouseButton1Down:Connect(
+                function()
+                    movingSlider = true
+                end
+            )
+            lbl.MouseButton1Up:Connect(
+                function()
                     movingSlider = false
                 end
-            end)
-            mice.Move:Connect(function()	
-                if movingSlider then		
-                    local xOffset = math.floor((mice.X - sliderframe.AbsolutePosition.X) / snapAmount + 0.5) * snapAmount
-                    local xOffsetClamped = math.clamp(xOffset, pixelsFromEdge, sliderframe.AbsoluteSize.X - pixelsFromEdge)
-                    
-                    local sliderPosNew = UDim2.new(0, xOffsetClamped, 1,0)
-                    
-                    lbl:TweenSize(sliderPosNew,  -- endSize (required)
-                        Enum.EasingDirection.Out,    -- easingDirection (default Out)
-                        Enum.EasingStyle.Quad,      -- easingStyle (default Quad)
-                        0.2,                          -- time (default: 1)
-                        true
-                    )
-                    
-                    local roundedAbsSize = math.floor(sliderframe.AbsoluteSize.X / snapAmount + 0.5) * snapAmount
-                    local roundedOffsetClamped = math.floor(xOffsetClamped / snapAmount + 0.5) * snapAmount
-                    
-                    local sliderValue = math.floor((roundedOffsetClamped+pixelsFromEdge)+val)
-                    if(sliderValue<=minv) then
-                        callback(minv)
-                        lbl1.Text = minv
-                    elseif(sliderValue>=maxv)then
-                        callback(maxv)
-                        lbl1.Text = maxv
-                    else 
-                        callback(sliderValue)
-                        lbl1.Text = sliderValue
+            )
+            inservice.InputEnded:Connect(
+                function(inputObject)
+                    if inputObject.UserInputType == Enum.UserInputType.MouseButton1 then
+                        movingSlider = false
                     end
-                   
                 end
-            end)
-        
+            )
+            mice.Move:Connect(
+                function()
+                    if movingSlider then
+                        local xOffset =
+                            math.floor((mice.X - sliderframe.AbsolutePosition.X) / snapAmount + 0.5) * snapAmount
+                        local xOffsetClamped =
+                            math.clamp(xOffset, pixelsFromEdge, sliderframe.AbsoluteSize.X - pixelsFromEdge)
+
+                        local sliderPosNew = UDim2.new(0, xOffsetClamped, 1, 0)
+
+                        lbl:TweenSize(
+                            sliderPosNew, -- endSize (required)
+                            Enum.EasingDirection.Out, -- easingDirection (default Out)
+                            Enum.EasingStyle.Quad, -- easingStyle (default Quad)
+                            0.2, -- time (default: 1)
+                            true
+                        )
+
+                        local roundedAbsSize = math.floor(sliderframe.AbsoluteSize.X / snapAmount + 0.5) * snapAmount
+                        local roundedOffsetClamped = math.floor(xOffsetClamped / snapAmount + 0.5) * snapAmount
+
+                        local sliderValue = math.floor((roundedOffsetClamped + pixelsFromEdge) + val)
+                        if (sliderValue <= minv) then
+                            callback(minv)
+                            lbl1.Text = minv
+                        elseif (sliderValue >= maxv) then
+                            callback(maxv)
+                            lbl1.Text = maxv
+                        else
+                            callback(sliderValue)
+                            lbl1.Text = sliderValue
+                        end
+                    end
+                end
+            )
         end
-        exsection.CanvasSize = UDim2.new(1, 0, 1,99999)
+        exsection.CanvasSize = UDim2.new(1, 0, 1, 99999)
         return section
     end
-        -- Scripts:
-        game:GetService("StarterGui"):SetCore("SendNotification", { Title = "Info", Text = "Press shift to toggle gui", Duration = 4 })
+    -- Scripts:
+    game:GetService("StarterGui"):SetCore(
+        "SendNotification",
+        {Title = "Info", Text = "Press shift to toggle gui", Duration = 4}
+    )
 
-	local gui = ScreenGui
-	local gui1 = gui.Frame
-local visible = true
-local UserInputService = game:GetService("UserInputService")
-UserInputService.InputBegan:Connect(function(UserInput, IsTyping)
-if (UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) and not isTyping) then
-		if visible then
-		    gui1.Visible = false
-		    visible = false
-		else
-		    gui1.Visible = true
-		    visible = true
+    local gui = ScreenGui
+    local gui1 = gui.Frame
+    local visible = true
+    local UserInputService = game:GetService("UserInputService")
+    UserInputService.InputBegan:Connect(
+        function(UserInput, IsTyping)
+            if (UserInputService:IsKeyDown(Enum.KeyCode.LeftShift) and not isTyping) then
+                if visible then
+                    gui1.Visible = false
+                    visible = false
+                else
+                    gui1.Visible = true
+                    visible = true
+                end
+            end
         end
+    )
+    local UserInputService = game:GetService("UserInputService")
+
+    local dragging
+    local dragInput
+    local dragStart
+    local startPos
+
+    local function update(input)
+        local delta = input.Position - dragStart
+        gui1.Position =
+            UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
     end
-end)
-local UserInputService = game:GetService("UserInputService")
 
+    gui1.InputBegan:Connect(
+        function(input)
+            if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+                dragging = true
+                dragStart = input.Position
+                startPos = gui1.Position
 
-local dragging
-local dragInput
-local dragStart
-local startPos
+                input.Changed:Connect(
+                    function()
+                        if input.UserInputState == Enum.UserInputState.End then
+                            dragging = false
+                        end
+                    end
+                )
+            end
+        end
+    )
 
-local function update(input)
-	local delta = input.Position - dragStart
-	gui1.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-end
+    gui1.InputChanged:Connect(
+        function(input)
+            if
+                input.UserInputType == Enum.UserInputType.MouseMovement or
+                    input.UserInputType == Enum.UserInputType.Touch
+             then
+                dragInput = input
+            end
+        end
+    )
 
-gui1.InputBegan:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-		dragging = true
-		dragStart = input.Position
-		startPos = gui1.Position
-		
-		input.Changed:Connect(function()
-			if input.UserInputState == Enum.UserInputState.End then
-				dragging = false
-			end
-		end)
-	end
-end)
-
-gui1.InputChanged:Connect(function(input)
-	if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-		dragInput = input
-	end
-end)
-
-UserInputService.InputChanged:Connect(function(input)
-	if input == dragInput and dragging then
-		update(input)
-	end
-end)
-	return gay
+    UserInputService.InputChanged:Connect(
+        function(input)
+            if input == dragInput and dragging then
+                update(input)
+            end
+        end
+    )
+    return gay
 end
 return Library
