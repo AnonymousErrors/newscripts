@@ -7,4 +7,6 @@ elseif pid == 7025847767 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/AnonymousErrors/newscripts/main/destroyedkidsim.lua"))()
 elseif pid == 7363174769 then
     loadstring(game:HttpGet("https://raw.githubusercontent.com/AnonymousErrors/newscripts/main/deliverymansim.lua"))()
+elseif pid == 6766156863 then
+    loadstring(game:HttpGet("https://raw.githubusercontent.com/AnonymousErrors/newscripts/main/strongmansim.lua")
 end
