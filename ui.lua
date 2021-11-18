@@ -2,6 +2,7 @@ local Library = {}
 function Library:main()
 	local a=game:GetService'VirtualUser'game:service"Players".LocalPlayer.Idled:connect(function()a:CaptureController()a:ClickButton2(Vector2.new())wait(2)end)
     local ScreenGui = Instance.new("ScreenGui")
+    pcall(function() syn.protect_gui(ScreenGui) end) -- haha lol undetectable
     local Frame = Instance.new("Frame")
     local sl = Instance.new("Frame")
     local slmain = Instance.new("ScrollingFrame")
