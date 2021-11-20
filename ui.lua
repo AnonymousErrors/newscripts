@@ -1,36 +1,4 @@
-Skip to content
-Search or jump to…
-Pulls
-Issues
-Marketplace
-Explore
- 
-@AnonymousErrors 
-AnonymousErrors
-/
-newscripts
-Public
-0
-0
-0
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-More
-newscripts/ui.lua
-@AnonymousErrors
-AnonymousErrors Fixed Wrong Name For Callback
-Latest commit 5353c63 2 minutes ago
- History
- 1 contributor
-569 lines (555 sloc)  24 KB
-   
-local Library = {}
+ local Library = {}
 function Library:main()
 	local a=game:GetService'VirtualUser'game:service"Players".LocalPlayer.Idled:connect(function()a:CaptureController()a:ClickButton2(Vector2.new())wait(2)end)
     local ScreenGui = Instance.new("ScreenGui")
@@ -599,15 +567,3 @@ function Library:main()
     return gay
 end
 return Library
-© 2021 GitHub, Inc.
-Terms
-Privacy
-Security
-Status
-Docs
-Contact GitHub
-Pricing
-API
-Training
-Blog
-About
