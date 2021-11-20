@@ -286,31 +286,34 @@ function Library:main()
             local open = false
             TextBox.Parent = ScrollingFrame
 			local open = false
-            for i, v in pairs(items:GetChildren()) do
-                local TextButton_3 = Instance.new("TextButton")
-                local UICorner_9 = Instance.new("UICorner")
-                TextButton_3.Parent = ScrollingFrame
-                TextButton_3.Text = v.Value
-                TextButton_3.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
-                TextButton_3.BorderColor3 = Color3.fromRGB(27, 42, 53)
-                TextButton_3.Size = UDim2.new(1, 0, 0, 25)
-                TextButton_3.Font = Enum.Font.SourceSans
-                TextButton_3.TextColor3 = Color3.fromRGB(255, 255, 255)
-                TextButton_3.TextSize = 14.000
-                UICorner_9.CornerRadius = UDim.new(0, 5)
-                UICorner_9.Parent = TextButton_3
-                xm = i
-                TextButton_3.Activated:Connect(
-                    function()
-						dropdown.Size = UDim2.new(0, 300, 0, 25)
-                        TextLabel.Rotation = 0
-                        open = false
-                        ScrollingFrame.Visible = open
-						dropdown_2.Text = name.." "..TextButton_3.Text
-                        callback(TextButton_3.Text)
-                    end
-                )
+            local function populatedropdown(content,valuecallback)
+                for i, v in pairs(content:GetChildren()) do
+                    local TextButton_3 = Instance.new("TextButton")
+                    local UICorner_9 = Instance.new("UICorner")
+                    TextButton_3.Parent = ScrollingFrame
+                    TextButton_3.Text = v.Value
+                    TextButton_3.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
+                    TextButton_3.BorderColor3 = Color3.fromRGB(27, 42, 53)
+                    TextButton_3.Size = UDim2.new(1, 0, 0, 25)
+                    TextButton_3.Font = Enum.Font.SourceSans
+                    TextButton_3.TextColor3 = Color3.fromRGB(255, 255, 255)
+                    TextButton_3.TextSize = 14.000
+                    UICorner_9.CornerRadius = UDim.new(0, 5)
+                    UICorner_9.Parent = TextButton_3
+                    xm = i
+                    TextButton_3.Activated:Connect(
+                        function()
+                            dropdown.Size = UDim2.new(0, 300, 0, 25)
+                            TextLabel.Rotation = 0
+                            open = false
+                            ScrollingFrame.Visible = open
+                            dropdown_2.Text = name.." "..TextButton_3.Text
+                            valuecallback(TextButton_3.Text)
+                        end
+                    )
+                end
             end
+            populatedropdown(items,valuecallback)
             TextBox.Changed:Connect(
                 function()
                     for i, v in pairs(ScrollingFrame:GetChildren()) do
@@ -342,6 +345,27 @@ function Library:main()
                     end
                 end
             )
+            -- flexible funcs
+            local dropdownfuncs = {}
+            function dropdownfuncs:update(name,newvals,newcallback)
+                dropdown_2.Text =  name
+                local x = newvals
+                for i,v in pairs(items:GetChildren()) do
+                    v:Remove()
+                end
+                for i,v in pairs(ScrollingFrame:GetChildren()) do
+                    if v:IsA("TextButton") then
+                        v:Remove()
+                    end
+                end
+                for _, Key in pairs(x) do
+                    local val = Instance.new("StringValue")
+                    val.Parent = items
+                    val.Value = tostring(Key)
+                end
+                populatedropdown(items,newcallback)
+            end
+            return dropdownfuncs
         end
         function section:addlabel(name)
             local label = Instance.new("TextLabel")
