@@ -307,7 +307,7 @@ function Library:main()
                             TextLabel.Rotation = 0
                             open = false
                             ScrollingFrame.Visible = open
-                            dropdown_2.Text = text.." "..TextButton_3.Text
+                            dropdown_2.Text = v.Value.." "..TextButton_3.Text
                             valuecallback(TextButton_3.Text)
                         end
                     )
