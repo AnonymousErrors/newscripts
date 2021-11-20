@@ -286,7 +286,7 @@ function Library:main()
             local open = false
             TextBox.Parent = ScrollingFrame
 			local open = false
-            local function populatedropdown(content,valuecallback)
+            local function populatedropdown(text, content,valuecallback)
                 for i, v in pairs(content:GetChildren()) do
                     local TextButton_3 = Instance.new("TextButton")
                     local UICorner_9 = Instance.new("UICorner")
@@ -307,7 +307,7 @@ function Library:main()
                             TextLabel.Rotation = 0
                             open = false
                             ScrollingFrame.Visible = open
-                            dropdown_2.Text = name.." "..TextButton_3.Text
+                            dropdown_2.Text = text.." "..TextButton_3.Text
                             valuecallback(TextButton_3.Text)
                         end
                     )
@@ -347,8 +347,8 @@ function Library:main()
             )
             -- flexible funcs
             local dropdownfuncs = {}
-            function dropdownfuncs:update(name,newvals,newcallback)
-                dropdown_2.Text =  name
+            function dropdownfuncs:update(newname,newvals,newcallback)
+                dropdown_2.Text =  newname
                 local x = newvals
                 for i,v in pairs(items:GetChildren()) do
                     v:Remove()
@@ -363,7 +363,7 @@ function Library:main()
                     val.Parent = items
                     val.Value = tostring(Key)
                 end
-                populatedropdown(items,newcallback)
+                populatedropdown(newname,items,newcallback)
             end
             return dropdownfuncs
         end
