@@ -313,7 +313,7 @@ function Library:main()
                     )
                 end
             end
-            populatedropdown(items,valuecallback)
+            populatedropdown(items,x,valuecallback)
             TextBox.Changed:Connect(
                 function()
                     for i, v in pairs(ScrollingFrame:GetChildren()) do
