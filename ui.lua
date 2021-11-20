@@ -308,12 +308,12 @@ function Library:main()
                             open = false
                             ScrollingFrame.Visible = open
                             dropdown_2.Text = v.Value.." "..TextButton_3.Text
-                            valuecallback(TextButton_3.Text)
+                            valuecallback(TextButton_3.Text)				
                         end
                     )
                 end
             end
-            populatedropdown(items,items,valuecallback)
+            populatedropdown(items,items,callback)
             TextBox.Changed:Connect(
                 function()
                     for i, v in pairs(ScrollingFrame:GetChildren()) do
