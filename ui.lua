@@ -1,11 +1,13 @@
  local Library = {}
 function Library:main()
 	local a=game:GetService'VirtualUser'game:service"Players".LocalPlayer.Idled:connect(function()a:CaptureController()a:ClickButton2(Vector2.new())wait(2)end)
+    local autoscanvas = loadstring(game:HttpGet("https://raw.githubusercontent.com/Fm-Trick/auto-canvas-size/master/AutoCanvasSize.lua",true))()
     local ScreenGui = Instance.new("ScreenGui")
     pcall(function() syn.protect_gui(ScreenGui) end) -- haha lol undetectable
     local Frame = Instance.new("Frame")
     local sl = Instance.new("Frame")
     local slmain = Instance.new("ScrollingFrame")
+	autoscanvas.Connect(slmain,true)
     local uiname = Instance.new("TextLabel")
     local sections = Instance.new("Frame")
     ScreenGui.Parent = game.CoreGui
@@ -101,6 +103,7 @@ function Library:main()
         )
         local UIListLayout_4 = Instance.new("UIListLayout")
         local exsection = Instance.new("ScrollingFrame")
+		autoscanvas.Connect(exsection,true)
         exsection.Name = name
         exsection.Parent = sections
         exsection.Active = true
@@ -256,6 +259,7 @@ function Library:main()
             UIListLayout_2.Parent = dropdown
             UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
             local ScrollingFrame = Instance.new("ScrollingFrame")
+			autoscanvas.Connect(exsection,true)
             ScrollingFrame.Parent = dropdown
             ScrollingFrame.Active = true
             ScrollingFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
