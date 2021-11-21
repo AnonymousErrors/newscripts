@@ -6,8 +6,7 @@ function Library:main()
     pcall(function() syn.protect_gui(ScreenGui) end) -- haha lol undetectable
     local Frame = Instance.new("Frame")
     local sl = Instance.new("Frame")
-    local slmain = Instance.new("ScrollingFrame")
-	autoscanvas.Connect(slmain,true)
+    local slmain = Instance.new("ScrollingFrame")	
     local uiname = Instance.new("TextLabel")
     local sections = Instance.new("Frame")
     ScreenGui.Parent = game.CoreGui
@@ -64,6 +63,7 @@ function Library:main()
     UIPadding.PaddingTop = UDim.new(0, 4)
     UICorner_3.CornerRadius = UDim.new(0, 5)
     UICorner_3.Parent = sl
+	autoscanvas.Connect(slmain,true)
     local UICorner_11 = Instance.new("UICorner")
     sections.Name = "sections"
     sections.Parent = Frame
@@ -103,7 +103,7 @@ function Library:main()
         )
         local UIListLayout_4 = Instance.new("UIListLayout")
         local exsection = Instance.new("ScrollingFrame")
-		autoscanvas.Connect(exsection,true)
+		
         exsection.Name = name
         exsection.Parent = sections
         exsection.Active = true
@@ -118,6 +118,7 @@ function Library:main()
         exsection.ScrollingDirection = Enum.ScrollingDirection.Y
         exsection.CanvasSize = UDim2.new(1, 0, 1, 99999)
         UIListLayout_4.Parent = exsection
+		autoscanvas.Connect(exsection,true)
         UIListLayout_4.HorizontalAlignment = Enum.HorizontalAlignment.Center
         UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
         UIListLayout_4.Padding = UDim.new(0, 5)
