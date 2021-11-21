@@ -1,4 +1,4 @@
- local Library = {}
+local Library = {}
 function Library:main()
 	local a=game:GetService'VirtualUser'game:service"Players".LocalPlayer.Idled:connect(function()a:CaptureController()a:ClickButton2(Vector2.new())wait(2)end)
     local autoscanvas = loadstring(game:HttpGet("https://raw.githubusercontent.com/Fm-Trick/auto-canvas-size/master/AutoCanvasSize.lua",true))()
@@ -59,11 +59,11 @@ function Library:main()
     UIListLayout.HorizontalAlignment = Enum.HorizontalAlignment.Center
     UIListLayout.SortOrder = Enum.SortOrder.LayoutOrder
     UIListLayout.Padding = UDim.new(0, 2)
+    autoscanvas.Connect(slmain,true)
     UIPadding.Parent = slmain
     UIPadding.PaddingTop = UDim.new(0, 4)
     UICorner_3.CornerRadius = UDim.new(0, 5)
     UICorner_3.Parent = sl
-	autoscanvas.Connect(slmain,true)
     local UICorner_11 = Instance.new("UICorner")
     sections.Name = "sections"
     sections.Parent = Frame
@@ -118,10 +118,10 @@ function Library:main()
         exsection.ScrollingDirection = Enum.ScrollingDirection.Y
         exsection.CanvasSize = UDim2.new(1, 0, 1, 99999)
         UIListLayout_4.Parent = exsection
-		autoscanvas.Connect(exsection,true)
         UIListLayout_4.HorizontalAlignment = Enum.HorizontalAlignment.Center
         UIListLayout_4.SortOrder = Enum.SortOrder.LayoutOrder
         UIListLayout_4.Padding = UDim.new(0, 5)
+        autoscanvas.Connect(exsection,true)
         local section = {}
         --addbutton
         function section:addbutton(name, callback)
@@ -260,7 +260,6 @@ function Library:main()
             UIListLayout_2.Parent = dropdown
             UIListLayout_2.SortOrder = Enum.SortOrder.LayoutOrder
             local ScrollingFrame = Instance.new("ScrollingFrame")
-			autoscanvas.Connect(exsection,true)
             ScrollingFrame.Parent = dropdown
             ScrollingFrame.Active = true
             ScrollingFrame.BackgroundColor3 = Color3.fromRGB(50, 50, 50)
@@ -277,7 +276,7 @@ function Library:main()
             local UIPadding_2 = Instance.new("UIPadding")
             UIPadding_2.Parent = ScrollingFrame
             UIPadding_2.PaddingTop = UDim.new(0, 4)
-
+            autoscanvas.Connect(ScrollingFrame,true)
             local items = Instance.new("Folder")
             items.Name = "items"
             items.Parent = dropdown
