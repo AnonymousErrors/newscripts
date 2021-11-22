@@ -291,7 +291,7 @@ function Library:main()
             TextBox.Parent = ScrollingFrame
 			local open = false
             local function populatedropdown(text, content,valuecallback)
-                for i, v in pairs(content:GetChildren()) do
+                for i, v in pairs(content) do
                     local TextButton_3 = Instance.new("TextButton")
                     local UICorner_9 = Instance.new("UICorner")
                     TextButton_3.Parent = ScrollingFrame
