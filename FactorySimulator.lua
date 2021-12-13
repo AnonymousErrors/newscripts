@@ -2,11 +2,11 @@
 local bindable = Instance.new("BindableFunction")
 function bindable.OnInvoke(response)
 	print("invoked")
-	setclipboard("discord.gg/WzHYjEnUF2")
+	setclipboard("https://discord.gg/R5K2vr7pXM ")
 end
 game:GetService("StarterGui"):SetCore("SendNotification", {
 	Title = "HUNT#1113 here",
-	Text = "Join discord.gg/WzHYjEnUF2 for the original script",
+	Text = "Join https://discord.gg/R5K2vr7pXM for the script",
 	Duration = 69420,
 	Callback = bindable,
 	Button1 = "Copy"
