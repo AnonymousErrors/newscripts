@@ -19,8 +19,8 @@ function Library:main()
 	msgbg.BackgroundColor3 = Color3.fromRGB(57, 57, 57)
 	msgbg.BorderColor3 = Color3.fromRGB(14, 23, 29)
 	msgbg.BorderSizePixel = 3
-	msgbg.Position = UDim2.new(1, 280, 0.0599999987, 0)
-	msgbg.Size = UDim2.new(0, 300, 0, 100)
+	msgbg.Position = UDim2.new(1, 480, 0.0599999987, 0)
+	msgbg.Size = UDim2.new(0, 500, 0, 100)
 
 	msgcorner.CornerRadius = UDim.new(0, 5)
 	msgcorner.Parent = msgbg
@@ -55,7 +55,7 @@ function Library:main()
 	msgbody.TextYAlignment = Enum.TextYAlignment.Top
 	function Library:popup(title, msg, duration)
 		msgtitle.Text = title
-		msgtitle.Text = msg
+		msgbody.Text = msg
 		msgbg:TweenPosition(
 			UDim2.new(1,0,0.06,0),
 			Enum.EasingDirection.In,
@@ -65,7 +65,7 @@ function Library:main()
 		)
 		task.wait(duration)
 		msgbg:TweenPosition(
-			UDim2.new(1,300,0.06,0),
+			UDim2.new(1,480,0.06,0),
 			Enum.EasingDirection.Out,
 			Enum.EasingStyle.Sine,
 			0.25,
@@ -73,7 +73,7 @@ function Library:main()
 		)
 		task.wait(0.25)
 		msgtitle.Text = ""
-		msgtitle.Text = ""
+		msgbody.Text = ""
 	end
 	local Frame = Instance.new("Frame")
 	local sl = Instance.new("Frame")
